@@ -1,3 +1,7 @@
+✗> infracost breakdown --path=.
+
+INFO Found Terraform project main at directory . using Terraform var files ip.auto.tfvars
+
 Project: main
 
  Name                                                            Monthly Qty  Unit                    Monthly Cost   
@@ -8,7 +12,7 @@ Project: main
     └─ Storage (general purpose SSD, gp2)                                  8  GB                             $0.80   
                                                                                                                      
  module.db.module.db_instance.aws_db_instance.this[0]                                                                
- ├─ Database instance (on-demand, Single-AZ, db.t2.micro)                730  hours                         $13.14   
+ ├─ Database instance (on-demand, Single-AZ, db.t3.micro)                730  hours                         $13.14   
  └─ Storage (general purpose SSD, gp2)                                    20  GB                             $2.30   
                                                                                                                      
  aws_route53_zone.main                                                                                               
@@ -27,9 +31,9 @@ Project: main
 *Usage costs can be estimated by updating Infracost Cloud settings, see docs for other options.
 
 ──────────────────────────────────
-16 cloud resources were detected:
+18 cloud resources were detected:
 ∙ 4 were estimated
-∙ 12 were free
+∙ 14 were free
 
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
 ┃ Project                                            ┃ Baseline cost ┃ Usage cost* ┃ Total cost ┃
