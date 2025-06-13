@@ -1,0 +1,33 @@
+users:
+  devops:
+    - devops_user1
+    - devops_user2
+  dev:
+    - dev_user1
+    - dev_user2
+  financial:
+    - fin_user1
+    - fin_user2
+  troubleshooting:
+    - ts_user1
+    - ts_user2
+
+managed_policies:
+  DevOpsAccess:
+    name: DevOpsAccess
+    document: devops_policy.json.j2
+  FinancialAccess:
+    name: FinancialAccess
+    document: financial_policy.json.j2
+  DeveloperAccess:
+    name: DeveloperAccess
+    document: dev_policy.json.j2
+  IAMAdminAccess:
+    name: IAMAdminAccess
+    document: iam_admin_policy.json.j2
+
+group_policy_mapping:
+  devops: DevOpsAccess
+  dev: DeveloperAccess
+  financial: FinancialAccess
+  troubleshooting: IAMAdminAccess

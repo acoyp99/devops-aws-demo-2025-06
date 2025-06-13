@@ -1,0 +1,48 @@
+- name: iam
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - group_vars/all.yml
+
+  tasks:
+
+    
+    
+    - name: Create IAM users
+      community.aws.iam_user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ users.devops + users.dev + users.financial + users.troubleshooting }}"
+      tags: [iam_user_create]
+
+    - name: Create access keys for users
+      community.aws.iam_access_key:
+        user_name: "{{ item }}"
+        state: present
+      loop: "{{ users.devops + users.dev + users.financial + users.troubleshooting }}"
+      tags: [iam_user_key]
+
+    - name: Create IAM groups and assign users
+      community.aws.iam_group:
+        name: "{{ item.key }}"
+        state: present
+        users: "{{ item.value }}"
+      loop: "{{ users | dict2items }}"
+      tags: [iam_group_create]
+
+    - name: Create managed policies
+      community.aws.iam_managed_policy:
+        policy_name: "{{ item.value.name }}"
+        policy: "{{ lookup('template', item.value.document) }}"
+        state: present
+      loop: "{{ managed_policies | dict2items }}"
+      tags: [iam_policy_create]
+
+    - name: Attach managed policy to group
+      community.aws.iam_group:
+        name: "{{ item.key }}"
+        managed_policies:
+          - "arn:aws:iam::{{ lookup('env','AWS_ACCOUNT_ID') }}:policy/{{ item.value }}"
+        state: present
+      loop: "{{ group_policy_mapping | dict2items }}"
+      tags: [iam_group_attach_policy]
