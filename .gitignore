@@ -8,7 +8,7 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-/infra/terraform/chatbot_key.pem
+**/chatbot_key_pem.pem
 
 
 # Python files
