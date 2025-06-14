@@ -18,6 +18,7 @@ override.tf.json
 __pycache__/
 *.env
 .env
+venv
 
 # Bash scripts
 *.sh~
