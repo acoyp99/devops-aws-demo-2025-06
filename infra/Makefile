@@ -1,7 +1,8 @@
 TF_DIR := terraform
 DURATION := 3000  # 50 minutes in seconds
 
-terraform: get_ip init plan confirm_apply wait destroy
+plan: get_ip init plan
+apply: confirm_apply wait destroy
 
 get_ip:
 	@echo "📡 Getting your public IP address..."
